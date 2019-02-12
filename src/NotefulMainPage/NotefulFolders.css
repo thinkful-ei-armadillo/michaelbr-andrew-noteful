@@ -1,5 +1,18 @@
 .folders-list{
-    border: 1px solid black;
-    width: 25%;
-    height:100%;
+    margin-top: -16px;
+    width: 30%;
+    height:100vh;
+    background: #0B1B32;
+    padding-top: 99px;
+}
+
+.folders-list a{
+    font-size: 35px;
+}
+
+.folders-list li{
+    background: #010D1E;
+    padding: 10px;
+    text-align: right;
+    margin-top: 10px;
 }

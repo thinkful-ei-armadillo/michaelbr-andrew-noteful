@@ -1,4 +1,16 @@
 .notes-list{
-    border: 1px solid black;
-    width: 50%;
+    
+    width: 67.5%;
+    margin-top: -100.3vh;
+    margin-left: 30%;
+    background: #102541;
+    padding-top: 14px;
+}
+
+.notes-list li{
+    background: #010D1E;
+    padding: 20px;
+    margin: 5px;
+    max-width: 380px;
+    
 }

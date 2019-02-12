@@ -9,9 +9,17 @@ body{
 
 a{
     text-decoration: none;
+    color: white;
 }
 
 li{
     list-style-type: none;
+}
+p{
+    color: white;
+}
+
+html{
+    background: #0B1B32;
 }
 
