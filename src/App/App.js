@@ -4,7 +4,7 @@ import {Route, Link} from 'react-router-dom';
 import store from '../store'
 import Note from '../NotefulMainPage/Note';
 import Folder from '../NotefulMainPage/Folder';
-
+import './App.css';
 
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="app-container">
         <Route 
           exact path='/' 
           render={() => <NotefulMainPage notes={this.state.notes} folders={this.state.folders}/>}
@@ -44,10 +44,10 @@ class App extends Component {
         <Route exact path='/folder/:folderId'
         render={(rProps) => {
           const {folderId} = rProps.match.params
-          const note = this.state.notes.find(val => val.id === folderId)
-          const folder = this.state.folders.find(val => val.id === note.id)
+          const filteredNotes = this.state.notes.filter(val => val.folderId === folderId)
+          // const folder = this.state.folders.find(val => val.id === note.id)
           return (
-            <Folder {...rProps} folder={folder} />
+            <Folder {...rProps} filteredNotes={filteredNotes} folderId={folderId} />
           )}}
          />
 

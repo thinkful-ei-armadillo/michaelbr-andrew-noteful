@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import './NotefulFolders.css';
 
 export default class NotefulFolder extends React.Component{
 
@@ -16,7 +17,7 @@ export default class NotefulFolder extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className="folders-list">
                 <ul>
                     {this.generateFolderList()}
                 </ul>

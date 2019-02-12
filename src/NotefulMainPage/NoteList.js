@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from 'react-router-dom';
+import './NoteList.css';
 
 export default class NoteList extends React.Component {
   generateNoteList = () => {
@@ -17,7 +18,7 @@ export default class NoteList extends React.Component {
   };
 
   render() {
-    return <ul>{this.generateNoteList()}</ul>;
+    return <ul className="notes-list">{this.generateNoteList()}</ul>;
     
   }
 }
