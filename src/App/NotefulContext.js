@@ -117,6 +117,7 @@ const NotefulContext = React.createContext( {
       
     ],
     'delete': ()=>{}
+    
   });
 
   export default NotefulContext;

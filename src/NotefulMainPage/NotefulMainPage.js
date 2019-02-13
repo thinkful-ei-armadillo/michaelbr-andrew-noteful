@@ -15,7 +15,7 @@ export default class NotefulMainPage extends React.Component{
             <div className="main-page">
                 <NotefulMainHeading />
                 <NotefulFolder />
-                <NoteList />
+                <NoteList history={this.props.history}/>
             </div>
         )
     }

@@ -6,25 +6,24 @@ import NotefulContext from "../App/NotefulContext";
 export default class NoteList extends React.Component {
   static contextType = NotefulContext;
 
-  handleDelete(param){
-    
+  handleDelete(param) {
     fetch(`http://localhost:9090/notes/${param}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json"
       }
     })
-    .then(res =>{
-      if(!res.ok)
-        throw new Error(res.message)
-      
-      return res.json();
-    })
-    .then(data =>{
-     this.context.delete(param)
-    })
-    .catch(err=> console.error(err.message))
+      .then(res => {
+        if (!res.ok) throw new Error(res.message);
 
+        return res.json();
+      })
+      .then(data => {
+        this.context.delete(param);
+        this.props.history.push("/");
+      })
+
+      .catch(err => console.error(err.message));
   }
 
   generateNoteList = () => {
@@ -34,7 +33,7 @@ export default class NoteList extends React.Component {
           <Link to={`/note/${note.id}`}>
             <p>{note.name}</p>
           </Link>
-          <button onClick ={(e) => this.handleDelete(note.id)}>Remove</button>
+          <button onClick={e => this.handleDelete(note.id)}>Remove</button>
         </li>
       );
     });
