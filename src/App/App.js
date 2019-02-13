@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NotefulMainPage from "../NotefulMainPage/NotefulMainPage";
 import { Route } from "react-router-dom";
-import store from "../store";
+// import store from "../store";
 import Note from "../NotefulMainPage/Note";
 import Folder from "../NotefulMainPage/Folder";
 import "./App.css";
@@ -11,8 +11,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: store.notes,
-      folders: store.folders
+      notes: [],
+      folders: []
     };
   }
 
@@ -20,6 +20,46 @@ class App extends Component {
     this.setState({
       currentItem: id
     });
+  }
+
+  componentDidMount() {
+    const folderUrl = 'http://localhost:9090/folders';
+    const noteUrl = 'http://localhost:9090/notes';
+
+    fetch(folderUrl)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(res.message)
+        }
+        return res.json();
+      })
+      .then(data => {
+      
+        this.setState({
+          folders: data
+        })
+      })
+      .catch(err =>
+        console.log(err.message)
+      )
+
+      fetch(noteUrl)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(res.message)
+        }
+        return res.json();
+      })
+      .then(data => {
+        
+        this.setState({
+          notes: data
+        })
+      })
+      .catch(err =>
+        console.log(err.message)
+      )
+
   }
 
   render() {
