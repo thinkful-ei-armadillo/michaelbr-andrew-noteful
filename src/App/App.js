@@ -16,6 +16,13 @@ class App extends Component {
     };
   }
 
+  deleteNote(id){
+    const newNoteList = this.state.notes.filter(i => i.id !== id);
+    this.setState({
+      notes: newNoteList
+    })
+  }
+
   updateCurrentId(id) {
     this.setState({
       currentItem: id
@@ -65,7 +72,7 @@ class App extends Component {
   render() {
     return (
       <NotefulContext.Provider
-        value={{ folders: this.state.folders, notes: this.state.notes }}
+        value={{ folders: this.state.folders, notes: this.state.notes, delete: (e) => this.deleteNote(e) }}
       >
         <div className="app-container">
           <Route exact path="/" render={() => <NotefulMainPage />} />

@@ -14,12 +14,17 @@ export default class NoteList extends React.Component {
         'content-type': 'application/json'
       }
     })
-    this.context.notes = this.context.notes.filter(i => i.id !== param);
-    console.log(this.context.notes);
-    
+    .then(res =>{
+      if(!res.ok)
+        throw new Error(res.message)
+      
+      return res.json();
+    })
+    .then(data =>{
+     this.context.delete(param)
+    })
+    .catch(err=> console.error(err.message))
 
-    
-    
   }
 
   generateNoteList = () => {
