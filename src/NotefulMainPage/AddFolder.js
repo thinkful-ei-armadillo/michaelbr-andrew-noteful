@@ -1,29 +1,31 @@
 import React from "react";
 import NotefulContext from "../App/NotefulContext";
+import propTypes from 'prop-types';
 
 export default class AddFolder extends React.Component {
   static contextType = NotefulContext;
-  state = { folderName: "", folderNameValid: false, validationMessages: {} };
+  state = { folderName: "", folderNameValid: true, validationMessages: {} };
 
   validateFolderName = e => {
     e.preventDefault();
     const folderName = { name: document.getElementById("folder-name").value };
-    const validationMessages = {...this.state.validationMessages};
+    console.log(folderName.name.length);
+    const validationMessages = { ...this.state.validationMessages };
     let folderNameValid = true;
 
-    if (folderName.length === 0) {
+    if (folderName.name.length === 0) {
       validationMessages.folderName =
         "Folder name must be at least 1 character long.";
       folderNameValid = false;
-    }
-    this.setState({ validationMessages, folderNameValid });
-    if(this.state.folderNameValid){
-        this.handleFolderSubmit(folderName)
+      this.setState({ validationMessages, folderNameValid });
+    } else {
+      folderNameValid = true;
+      this.setState({ folderNameValid });
+      this.handleFolderSubmit(folderName);
     }
   };
 
   handleFolderSubmit = newFolder => {
-  
     fetch("http://localhost:9090/folders", {
       method: "POST",
       headers: {
@@ -41,6 +43,7 @@ export default class AddFolder extends React.Component {
       });
   };
   render() {
+    const { validationMessages } = this.state;
     return (
       <div>
         <h2>Create a folder</h2>
@@ -50,8 +53,16 @@ export default class AddFolder extends React.Component {
             <input type="text" id="folder-name" />
           </label>
           <button type="submit">Submit</button>
+          {validationMessages.folderName && (
+            <p className="error">{validationMessages.folderName}</p>
+          )}
         </form>
       </div>
     );
   }
+}
+AddFolder.propTypes = {
+  folderName: propTypes.string.isRequired,
+  folderNameValid: propTypes.bool.isRequired,
+  validationMessages: propTypes.object
 }

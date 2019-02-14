@@ -7,6 +7,9 @@ import Folder from "../NotefulMainPage/Folder";
 import "./App.css";
 import NotefulContext from "./NotefulContext";
 import AddFolder from "../NotefulMainPage/AddFolder";
+import AddNewNote from "./AddNewNote";
+import ErrorPage from "./ErrorPage";
+import propTypes from 'prop-types';
 
 class App extends Component {
   constructor(props) {
@@ -25,10 +28,18 @@ class App extends Component {
   }
 
   addNewFolder(id) {
-    const newFolderList = [...this.state.folders]
+    const newFolderList = [...this.state.folders];
     newFolderList.push(id);
     this.setState({
       folders: newFolderList
+    });
+  }
+
+  addNewNote(note) {
+    const newNotes = [...this.state.notes];
+    newNotes.push(note);
+    this.setState({
+      notes: newNotes
     });
   }
 
@@ -72,40 +83,50 @@ class App extends Component {
           folders: this.state.folders,
           notes: this.state.notes,
           delete: e => this.deleteNote(e),
-          addFolder: e => this.addNewFolder(e)
+          addFolder: e => this.addNewFolder(e),
+          addNote: e => this.addNewNote(e)
         }}
       >
         <div className="app-container">
-          <Route
-            exact
-            path="/"
-            render={rProps => <NotefulMainPage history={rProps.history} />}
-          />
-          <Route
-            exact
-            path="/note/:noteId"
-            render={rProps => {
-              const { noteId } = rProps.match.params;
-              return <Note {...rProps} id={noteId} />;
-            }}
-          />
+          <ErrorPage>
+            <Route
+              exact
+              path="/"
+              render={rProps => <NotefulMainPage history={rProps.history} />}
+            />
+            <Route
+              exact
+              path="/note/:noteId"
+              render={rProps => {
+                const { noteId } = rProps.match.params;
+                return <Note {...rProps} id={noteId} />;
+              }}
+            />
 
-          <Route
-            exact
-            path="/folder/:folderId"
-            render={rProps => {
-              const { folderId } = rProps.match.params;
+            <Route
+              exact
+              path="/folder/:folderId"
+              render={rProps => {
+                const { folderId } = rProps.match.params;
 
-              return <Folder {...rProps} folderId={folderId} />;
-            }}
-          />
-          <Route
-            exact
-            path="/add-folder"
-            render={rProps => {
-              return <AddFolder {...rProps} />;
-            }}
-          />
+                return <Folder {...rProps} folderId={folderId} />;
+              }}
+            />
+            <Route
+              exact
+              path="/add-folder"
+              render={rProps => {
+                return <AddFolder {...rProps} />;
+              }}
+            />
+            <Route
+              exact
+              path="/new-note"
+              render={rProps => {
+                return <AddNewNote {...rProps} />;
+              }}
+            />
+          </ErrorPage>
         </div>
       </NotefulContext.Provider>
     );
