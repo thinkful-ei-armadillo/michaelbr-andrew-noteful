@@ -40,6 +40,13 @@ export default class NoteList extends React.Component {
   };
 
   render() {
-    return <ul className="notes-list">{this.generateNoteList()}</ul>;
+    return (
+      <div>
+        <ul className="notes-list">{this.generateNoteList()}</ul>
+        <Link to="/new-note">
+          <button type="click">Add New Note</button>
+        </Link>
+      </div>
+    );
   }
 }

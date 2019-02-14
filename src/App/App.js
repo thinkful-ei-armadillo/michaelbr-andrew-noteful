@@ -6,6 +6,7 @@ import Note from "../NotefulMainPage/Note";
 import Folder from "../NotefulMainPage/Folder";
 import "./App.css";
 import NotefulContext from "./NotefulContext";
+import AddFolder from "../NotefulMainPage/AddFolder";
 
 class App extends Component {
   constructor(props) {
@@ -23,9 +24,11 @@ class App extends Component {
     });
   }
 
-  updateCurrentId(id) {
+  addNewFolder(id) {
+    const newFolderList = [...this.state.folders]
+    newFolderList.push(id);
     this.setState({
-      currentItem: id
+      folders: newFolderList
     });
   }
 
@@ -68,7 +71,8 @@ class App extends Component {
         value={{
           folders: this.state.folders,
           notes: this.state.notes,
-          delete: e => this.deleteNote(e)
+          delete: e => this.deleteNote(e),
+          addFolder: e => this.addNewFolder(e)
         }}
       >
         <div className="app-container">
@@ -93,6 +97,13 @@ class App extends Component {
               const { folderId } = rProps.match.params;
 
               return <Folder {...rProps} folderId={folderId} />;
+            }}
+          />
+          <Route
+            exact
+            path="/add-folder"
+            render={rProps => {
+              return <AddFolder {...rProps} />;
             }}
           />
         </div>
