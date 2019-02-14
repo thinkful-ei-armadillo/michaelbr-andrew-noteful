@@ -1,6 +1,6 @@
 import React from "react";
 import NotefulContext from "../App/NotefulContext";
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export default class AddFolder extends React.Component {
   static contextType = NotefulContext;
@@ -62,7 +62,7 @@ export default class AddFolder extends React.Component {
   }
 }
 AddFolder.propTypes = {
-  folderName: propTypes.string.isRequired,
-  folderNameValid: propTypes.bool.isRequired,
-  validationMessages: propTypes.object
+  folderName: PropTypes.string.isRequired,
+  folderNameValid: PropTypes.bool.isRequired,
+  validationMessages: PropTypes.object
 }

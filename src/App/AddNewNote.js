@@ -1,6 +1,6 @@
 import React from "react";
 import NotefulContext from "../App/NotefulContext";
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export default class AddNewNote extends React.Component {
   static contextType = NotefulContext;
@@ -87,7 +87,7 @@ export default class AddNewNote extends React.Component {
   }
 }
 AddNewNote.propTypes = {
-  noteName: propTypes.string.isRequired,
-  noteNameValid: propTypes.bool.isRequired,
-  validationMessages: propTypes.object
+  noteName: PropTypes.string.isRequired,
+  noteNameValid: PropTypes.bool.isRequired,
+  validationMessages: PropTypes.object
 }
